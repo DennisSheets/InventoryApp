@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:fragment="head">
+    <meta charset="UTF-8"/>
+    <title>Inventory Application</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+</head>
+
+<body class="container">
+
+<header th:fragment="header">
+
+        <h1 th:text = "${title}">Please bind a title variable this page!</h1>
+
+    <nav >
+        <ul class="nav text-center">
+            <li class="nav-item"><a class="nav-link" th:href="@{/categories}">List Categories</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/categories/new}">Add Category</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/products}">List Products</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/products/new}">Add Product</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/brands}">List Brands</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/brands/new}">Add Brand</a></li>
+
+        </ul>
+    </nav>
+</header>
+
+</body>
+
+</html>
