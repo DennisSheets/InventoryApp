@@ -49,6 +49,8 @@ public class Role {
         this.name = name;
     }
 
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -60,5 +62,10 @@ public class Role {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }

@@ -26,7 +26,7 @@ public class User {
         this.password = password;
     }
 
-    @ManyToMany (cascade = CascadeType.PERSIST)
+    @ManyToMany // (cascade = CascadeType.PERSIST, fetch = FetchType.EAGER) // fetch eager add for test 8 // all commented out for test 9
     @JoinTable (
             name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),

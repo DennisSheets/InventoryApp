@@ -22,10 +22,10 @@ public class UserRepositoryTest {
     @Autowired
     private TestEntityManager entityManager;
 
-    @Test
+    @Test  // Test 1
     public  void test(){}
 
-    @Test
+    @Test   // test 2
     public void testCreateRoles(){
         Role roleAdmin = new Role("Administrator");
         Role roleEditor = new Role("Editor");
@@ -36,7 +36,7 @@ public class UserRepositoryTest {
         entityManager.persist(roleAVisitor);
         }
 
-    @Test
+    @Test    // Test 3
     public void testCreateNewUserWithOneRole() {
         Role roleAdmin = entityManager.find(Role.class,1);
         User user = new User("madsur@yahoo.com","asdf1234");
@@ -45,7 +45,7 @@ public class UserRepositoryTest {
         userRepository.save(user);
     }
 
-    @Test
+    @Test    // Test 4
     public void testCreateNewUserWithTwoRoles() {
         Role roleEditor = entityManager.find(Role.class,2);
         Role roleVisitor = entityManager.find(Role.class,3);
@@ -56,7 +56,7 @@ public class UserRepositoryTest {
         userRepository.save(user);
     }
 
-    @Test
+    @Test    // Test 5
     public void testAssignRoleToExistingUser() {
         User user = userRepository.findById(1).get();
         Role roleEditor = entityManager.find(Role.class,2);
@@ -64,18 +64,32 @@ public class UserRepositoryTest {
 
     }
 
-    @Test
+    @Test    // Test 6
     public void testRemoveRoleFromExistingUser() {
         User user = userRepository.findById(1).get();
         Role role = new Role(2);
         user.removeRole(role);
     }
 
-    @Test
+    @Test    // Test 7
     public void testCreateNewUserWithNewRole() {
         Role roleSalesperson = new Role("Salesperson");
         User user = new User("madsur@lycos.com", "thatsOLD");
         user.addRole(roleSalesperson);
+    }
+
+    @Test    // Test 8
+    public void testGetUser() {
+        User user = userRepository.findById(1).get();
+        entityManager.detach(user);
+
+        System.out.println(user.getEmail());
+        System.out.println(user.getRoles());
+    }
+
+    @Test    // Test 9
+    public void testRemoveUser() {
+        userRepository.deleteById(4);
     }
 
 
