@@ -26,6 +26,12 @@ public class User {
         this.password = password;
     }
 
+    public User(Integer id) {
+        super();
+        this.id = id;
+    }
+
+
     @ManyToMany // (cascade = CascadeType.PERSIST, fetch = FetchType.EAGER) // fetch eager add for test 8 // all commented out for test 9
     @JoinTable (
             name = "user_role",
@@ -66,11 +72,19 @@ public class User {
     }
 
 
+
     public void addRole(Role role){
         this.roles.add(role);
     }
 
     public void removeRole(Role role){
         this.roles.remove(role);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                '}';
     }
 }

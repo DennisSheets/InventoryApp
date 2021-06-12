@@ -1,6 +1,7 @@
 package InventoryApp.InventoryApp.models;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +25,16 @@ public class Product {
     private List<ProductDetails> details = new ArrayList<>();
 
 
+
+    public Product(Integer id){
+        super();
+        this.id = id;
+    }
+
+    public Product(){}
+
+
+
     public Integer getId() {return id;}
 
     public void setId(Integer id) {this.id = id;}
@@ -40,7 +51,6 @@ public class Product {
 
     public void setCategory(Category category) {this.category = category;}
 
-
     public List<ProductDetails> getDetails() {
         return details;
     }
@@ -48,6 +58,8 @@ public class Product {
     public void setDetails(List<ProductDetails> details) {
         this.details = details;
     }
+
+
 
     public void addDetail(String name, String value){
         this.details.add(new ProductDetails(name, value, this));
@@ -57,5 +69,10 @@ public class Product {
         this.details.add(new ProductDetails(id, name, value, this));
     }
 
-
+    @Override
+    public String toString() {
+        return "Product{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }
