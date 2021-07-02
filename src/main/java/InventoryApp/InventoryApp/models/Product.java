@@ -17,6 +17,12 @@ public class Product {
 
     private float price;
 
+    private float capacity;
+    private int qtyTested;
+    private int qtyUntested;
+    private String location;
+    private String manufacturer;
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
@@ -46,6 +52,46 @@ public class Product {
     public float getPrice() {return price;}
 
     public void setPrice(float price) {this.price = price;}
+
+    public float getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(float capacity) {
+        this.capacity = capacity;
+    }
+
+    public int getQtyTested() {
+        return qtyTested;
+    }
+
+    public void setQtyTested(int qtyTested) {
+        this.qtyTested = qtyTested;
+    }
+
+    public int getQtyUntested() {
+        return qtyUntested;
+    }
+
+    public void setQtyUntested(int qtyUntested) {
+        this.qtyUntested = qtyUntested;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
 
     public Category getCategory() {return category;}
 
