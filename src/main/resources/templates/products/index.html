@@ -19,30 +19,28 @@
                     <th>qty untested</th>
                     <th>location</th>
 
-                    <th>Details</th>
+                    <!-- <th>Details</th> -->
                 </tr>
             </thead>
-            <tbody>
+            <tbody style="white-space:nowrap">
                 <th:block th:each="product : ${listProducts}">
                     <tr>
                         <td th:text="${product.id}"></td>
                         <td th:text="${product.manufacturer}"></td>
                         <td th:text="${product.name}"></td>
-                        <td>[[${product.category.name}]]</td>
+                        <td style="white-space:nowrap">[[${product.category.name}]]</td>
                         <td>[[${product.capacity}]]</td>
                         <td>[[${product.price}]]</td>
                         <td>[[${product.qtyTested}]]</td>
                         <td>[[${product.qtyUntested}]]</td>
                         <td>[[${product.location}]]</td>
 
-                        <td>[[${product.details}]]</td>
+                        <!-- <td>[[${product.details}]]</td> -->
 
-                        <td>
-                            <a th:href="@{'/products/edit/' + ${product.id}}">edit</a>
-                            &nbsp;
-                            <a th:href="@{'/products/delete/' + ${product.id}}">delete</a>
-                            &nbsp;
-                            <a th:href="@{'https://www.ebay.com/sch/58058/i.html?_from=R40&_nkw=' + ${product.name} + '&LH_Complete=1'}">ebay</a>
+                        <td> <a th:href="@{'/products/edit/' + ${product.id}}">edit</a> </td>
+                        <td> <a th:href="@{'/products/delete/' + ${product.id}}">delete</a> </td>
+
+                        <td> <a th:href="@{'https://www.ebay.com/sch/58058/i.html?_from=R40&_nkw=' + ${product.name} + '&LH_Complete=1'}">ebay</a>
                         </td>
 
                     </tr>
