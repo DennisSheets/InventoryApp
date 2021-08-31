@@ -37,28 +37,28 @@ public class ShoppingCartTests {
         cartItemRepository.save(item);
     }
 
-    @Test
-    public void testAddItemByIds(){
-        Product product = new Product(2);
-        User user = new User(2);
+//    @Test
+//    public void testAddItemByIds(){
+//        Product product = new Product(2);
+//        User user = new User(2);
+//
+//        CartItem item = new CartItem(2,product, user);
+//        cartItemRepository.save(item);
+//    }
 
-        CartItem item = new CartItem(2,product, user);
-        cartItemRepository.save(item);
-    }
-
-    @Test
-    public void testAddMultipleItems() {
-        User user = new User(1);
-        Product product1 = new Product(1);
-        Product product2 = new Product(2);
-        Product product3 = new Product(3);
-
-        CartItem item1 = new CartItem(1,product1, user);
-        CartItem item2 = new CartItem(2,product2, user);
-        CartItem item3 = new CartItem(3,product3, user);
-
-        cartItemRepository.saveAll(List.of(item1,item2,item3));
-    }
+//    @Test
+//    public void testAddMultipleItems() {
+//        User user = new User(1);
+//        Product product1 = new Product(1);
+//        Product product2 = new Product(2);
+//        Product product3 = new Product(3);
+//
+//        CartItem item1 = new CartItem(1,product1, user);
+//        CartItem item2 = new CartItem(2,product2, user);
+//        CartItem item3 = new CartItem(3,product3, user);
+//
+//        cartItemRepository.saveAll(List.of(item1,item2,item3));
+//    }
 
     @Test
     public void testListItems(){

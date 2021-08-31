@@ -2,11 +2,10 @@ package InventoryApp.InventoryApp.controllers;
 
 import InventoryApp.InventoryApp.data.RoleRepository;
 import InventoryApp.InventoryApp.data.UserRepository;
-import InventoryApp.InventoryApp.models.Category;
-import InventoryApp.InventoryApp.models.Product;
 import InventoryApp.InventoryApp.models.Role;
 import InventoryApp.InventoryApp.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +24,8 @@ public class UserController {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @GetMapping("")
     public String listUsers (Model model) {
@@ -47,7 +48,9 @@ public class UserController {
 
     @PostMapping("save")
     public String saveUser(Model model, User user){
-
+        String password = user.getPwHash();
+        String hash = encoder.encode(password);
+        user.setPwHash(hash);
         userRepository.save(user);
         return "redirect:";
     }
@@ -56,7 +59,6 @@ public class UserController {
     public String displayEditUser(@PathVariable("id") Integer id, Model model) {
         User user = userRepository.findById(id).get();
         List<Role> listRoles = roleRepository.findAll();
-
         model.addAttribute("listRoles", listRoles);
         model.addAttribute("title","Edit User");
         model.addAttribute("user", user);

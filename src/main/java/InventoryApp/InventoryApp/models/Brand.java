@@ -6,27 +6,19 @@ import java.util.List;
 
 
 @Entity
-public class Brand {
-
-    @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class Brand  extends AbstractEntity{
 
     @Column(length = 45, nullable = true, unique = true)
     private String name;
-
 
     @OneToMany
     @JoinColumn (name="brand_id")
     private List<Category> categories = new ArrayList<>();
 
+    public Brand() {}
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+    public Brand(String name) {
+        this.name = name;
     }
 
     public String getName() {

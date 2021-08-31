@@ -64,12 +64,12 @@ public class UserRepositoryTest {
 
     }
 
-    @Test    // Test 6
-    public void testRemoveRoleFromExistingUser() {
-        User user = userRepository.findById(1).get();
-        Role role = new Role(2);
-        user.removeRole(role);
-    }
+//    @Test    // Test 6
+//    public void testRemoveRoleFromExistingUser() {
+//        User user = userRepository.findById(1).get();
+//        Role role = new Role(1);
+//        user.removeRole(role);
+//    }
 
     @Test    // Test 7
     public void testCreateNewUserWithNewRole() {
@@ -83,7 +83,7 @@ public class UserRepositoryTest {
         User user = userRepository.findById(1).get();
         entityManager.detach(user);
 
-        System.out.println(user.getEmail());
+        System.out.println(user.getUsername());
         System.out.println(user.getRoles());
     }
 

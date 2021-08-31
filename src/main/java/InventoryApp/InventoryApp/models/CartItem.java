@@ -1,16 +1,10 @@
 package InventoryApp.InventoryApp.models;
 
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "cart_items")
-public class CartItem {
-
-    @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class CartItem extends AbstractEntity{
 
     private int quantity;
 
@@ -22,10 +16,10 @@ public class CartItem {
     @JoinColumn (name = "user_id")
     private User user;
 
+    public CartItem(){}
 
-    public CartItem(Integer id, int quantity, Product product, User user) {
+    public CartItem(int quantity, Product product) {
         super();
-        this.id = id;
         this.quantity = quantity;
         this.product = product;
         this.user = user;
@@ -38,17 +32,6 @@ public class CartItem {
         this.user = user;
     }
 
-    public CartItem(){}
-
-
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public int getQuantity() {
         return quantity;
@@ -78,7 +61,6 @@ public class CartItem {
     @Override
     public String toString() {
         return "CartItem{" +
-                "id=" + id +
                 ", quantity=" + quantity +
                 ", product=" + product +
                 ", user=" + user +

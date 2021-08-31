@@ -1,40 +1,50 @@
 package InventoryApp.InventoryApp.models;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Set;
 
 @Entity
-public class User {
+@Table (name = "users")
+public class User{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (name = "user_id")
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(length = 45, nullable = false, unique = true)
+    private String username;
+
+    @Column
     private String email;
 
-    @Column(length =10, nullable = false)
-    private String password;
+    @Column(nullable = false)
+    private String pwHash;
 
-    public User(){}
+    @Column
+    private boolean enabled;
 
-    public User(String email, String password) {
-        super();
+    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+    public User(){ }
+
+    public User(String username, String pwHash) {
+        this.username = username;
+        this.pwHash = encoder.encode(pwHash);
+    }
+
+    public User(String username, String pwHash, String email) {
+        this.username = username;
+        this.pwHash = encoder.encode(pwHash);
         this.email = email;
-        this.password = password;
     }
 
-    public User(Integer id) {
-        super();
-        this.id = id;
-    }
-
-
-    @ManyToMany // (cascade = CascadeType.PERSIST, fetch = FetchType.EAGER) // fetch eager add for test 8 // all commented out for test 9
+    @ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable (
-            name = "user_role",
+            name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
             )
@@ -49,18 +59,34 @@ public class User {
         this.id = id;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) { this.username = username; }
+
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) { this.email = email; }
-
-    public String getPassword() {
-        return password;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public String getPwHash() {
+        return pwHash;
+    }
+
+    public void setPwHash(String pwHash) {
+        this.pwHash = pwHash;
     }
 
     public Set<Role> getRoles() {
@@ -71,7 +97,13 @@ public class User {
         this.roles = roles;
     }
 
+    public Boolean getEnabled() {
+        return enabled;
+    }
 
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
 
     public void addRole(Role role){
         this.roles.add(role);
@@ -83,8 +115,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "email='" + email + '\'' +
-                '}';
+        return username ;
     }
+
 }
