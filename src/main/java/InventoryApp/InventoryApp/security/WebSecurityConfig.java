@@ -40,17 +40,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
+                //.csrf().disable()
                 .authorizeRequests()
+                    //.antMatchers("/delete/**").hasAuthority("ADMIN")
+                    //.antMatchers("/edit/**").hasAnyAuthority("ADMIN", "EDITOR")
                     .antMatchers("/","/css/*","/js/*").permitAll()
                     .anyRequest()
                     .authenticated()
                 .and()
-                .formLogin()
-                    .permitAll()
+                .formLogin().permitAll()
                 .and()
-                .logout()
-                    .permitAll()
+                .logout().permitAll()
+                //.and()
+                //.exceptionHandling().accessDeniedPage("/403")
                 ;
     }
 }
