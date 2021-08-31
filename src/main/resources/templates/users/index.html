@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="http:/www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <head th:replace="fragments :: head"></head>
 
     <body class="container text-center">
@@ -14,6 +15,7 @@
                     <th>email</th>
                     <th>hashed password</th>
                     <th>Roles</th>
+                    <th sec:auth ></th>
 
                 </tr>
             </thead>
@@ -26,10 +28,10 @@
                         <td>[[${user.pwHash}]]</td>
                         <td>[[${user.roles}]]</td>
 
-                        <td>
+                        <td sec:authorize="hasAnyAuthority('ADMIN','EDITOR')">
                             <a th:href="@{'/users/edit/' + ${user.id}}">edit</a>
                             &nbsp;
-                            <a th:href="@{'/users/delete/' + ${user.id}}">delete</a>
+                            <a sec:authorize="hasAuthority('ADMIN')"th:href="@{'/users/delete/' + ${user.id}}">delete</a>
                         </td>
 
                     </tr>

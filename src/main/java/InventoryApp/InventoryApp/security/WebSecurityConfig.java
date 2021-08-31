@@ -42,17 +42,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 //.csrf().disable()
                 .authorizeRequests()
-                    //.antMatchers("/delete/**").hasAuthority("ADMIN")
-                    //.antMatchers("/edit/**").hasAnyAuthority("ADMIN", "EDITOR")
-                    .antMatchers("/","/css/*","/js/*").permitAll()
+                    .antMatchers("/products/delete/**",
+                                            "/users/delete/**",
+                                            "/categories/delete/**",
+                                            "/brands/delete/**").hasAuthority("ADMIN")
+                    .antMatchers("/users/new/**",
+                                            "/users/edit/**").hasAnyAuthority("ADMIN","EDITOR")
+                    .antMatchers("/products/new/**",
+                                            "/products/edit/**").hasAnyAuthority("ADMIN","EDITOR")
+                    .antMatchers("/brands/new/**",
+                                            "/brands/edit/**").hasAnyAuthority("ADMIN","EDITOR")
+                    .antMatchers("/categories/new/**",
+                                            "/categories/edit/**").hasAnyAuthority("ADMIN","EDITOR")
+
+                    .antMatchers("/index","/css/*","/js/*").permitAll()
                     .anyRequest()
                     .authenticated()
                 .and()
                 .formLogin().permitAll()
                 .and()
                 .logout().permitAll()
-                //.and()
-                //.exceptionHandling().accessDeniedPage("/403")
+                .and()
+                .exceptionHandling().accessDeniedPage("/403")
                 ;
     }
 }

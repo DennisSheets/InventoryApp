@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="http:/www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <head th:replace="fragments :: head"></head>
 
     <body class="container text-center">
@@ -20,8 +21,8 @@
                         <td th:text="${brand.id}"></td>
                         <td th:text="${brand.name}"></td>
                         <td th:text="${brand.categories}"></td>
-                        <td>
-                            <a th:href="@{'/brands/edit/' + ${brand.id}}">edit</a>
+                        <td  >
+                            <a sec:authorize="hasAnyAuthority('ADMIN','EDITOR')" th:href="@{'/brands/edit/' + ${brand.id}}">edit</a>
                         </td>
                     </tr>
 
